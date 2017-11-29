@@ -6,8 +6,9 @@
 CC  ?= gcc
 CXX ?= g++
 
-DESTDIR =
-PREFIX  = /usr/local
+DESTDIR ?=
+PREFIX  ?= /usr/local
+SUFFIX  ?= /lib/lv2
 
 # ---------------------------------------------------------------------------------------------------------------------
 
@@ -54,8 +55,8 @@ clean:
 	rm -f LV2/*.lv2/*.so
 
 install:
-	install -d $(DESTDIR)$(PREFIX)/lib/lv2/
-	cp -r LV2/*.lv2/ $(DESTDIR)$(PREFIX)/lib/lv2/
+	install -d $(DESTDIR)$(PREFIX)$(SUFFIX)/
+	cp -r LV2/*.lv2/ $(DESTDIR)$(PREFIX)$(SUFFIX)/
 
 export:
 	$(CXX) CppSrc/FreakClip$(FNAME_SUFFIX) $(BUILD_CXX_FLAGS) $(LINK_FLAGS) -o export && ./export > Freakclip.ttl; rm -f export
